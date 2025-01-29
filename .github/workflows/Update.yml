@@ -19,9 +19,10 @@ jobs:
         CF_API_KEY: ${{ secrets.CF_API_KEY }}
         CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
         CF_RECORD_ID: ${{ secrets.CF_RECORD_ID }}
+        CF_NAME: ${{ secrets.CF_NAME }}
       run: |
         curl -X PUT "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/dns_records/${CF_RECORD_ID}" \
         -H "X-Auth-Email: ${CF_API_EMAIL}" \
         -H "X-Auth-Key: ${CF_API_KEY}" \
         -H "Content-Type: application/json" \
-        --data '{"type":"TXT","name":"example.com","content":"your-txt-record-content","ttl":120,"proxied":false}'
+        --data '{"type":"TXT","name":"${CF_NAME}","content":"your-txt-record-content","ttl":120,"proxied":false}'
